@@ -1,9 +1,10 @@
-<app-side-menu></app-side-menu>
-<main id="main" class="main">
-    <section class="section">
+<app-header></app-header>
+
+<div class="ex-basic-2">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
+            <div class="col-lg-10 mx-auto">
+                <div class="card px-5" style="border:1px solid black">
                     <div class="card-body">
                         <h3 class="card-title">Form-281</h3>
                         <h5 class="card-title">PART A - GENERAL PARTICULARS</h5>
@@ -108,21 +109,13 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">PART B <br>
                             POSITION OF OUTSTANDING DEMAND AS ON THE DATE OF APPLICATION </h5>
 
                         <div class="row">
                             <div class="col-md-12" style="text-align: right;">
-                                <a (click)="addTableRow()"><i class="bi bi-file-plus-fill"
+                                <a (click)="addTableRow()"><i class="fas fa-plus-square"
                                         style="font-size: 30px;color: blue;"></i></a>
                             </div>
                         </div>
@@ -148,7 +141,8 @@
                                         <input formControlName="DEMAND_SECTION" class="form-control" type="text" />
                                     </td>
                                     <td>
-                                        <input formControlName="OUTSTANDING_DEMAND" class="form-control" type="number" />
+                                        <input formControlName="OUTSTANDING_DEMAND" class="form-control"
+                                            type="number" />
                                     </td>
                                     <td>
                                         <input formControlName="PARTICULARS_OF_STAY" class="form-control" type="text" />
@@ -157,21 +151,13 @@
                                         <input formControlName="REMARKS" class="form-control" type="text" />
                                     </td>
                                     <td>
-                                        <a (click)="deleteRow(i)"><i class="bi bi-trash-fill"
-                                                style="font-size: 20px;color: blue;"></i></a>
+                                        <a (click)="deleteRow(i)"><i class="fas fa-trash"
+                                                style="font-size: 20px;color: red;"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">PART C <br><br>
                             Particulars of land, building, machinery, plant, shares, securities and fixed deposits
@@ -180,7 +166,7 @@
 
                         <div class="row">
                             <div class="col-md-12" style="text-align: right;">
-                                <a (click)="addTableRow2()"><i class="bi bi-file-plus-fill"
+                                <a (click)="addTableRow2()"><i class="fas fa-plus-square"
                                         style="font-size: 30px;color: blue;"></i></a>
                             </div>
                         </div>
@@ -227,21 +213,13 @@
                                         <input formControlName="REMARKS" class="form-control" type="text" />
                                     </td>
                                     <td>
-                                        <a (click)="deleteRow2(i)"><i class="bi bi-trash-fill"
-                                                style="font-size: 20px;color: blue;"></i></a>
+                                        <a (click)="deleteRow2(i)"><i class="fas fa-trash"
+                                                style="font-size: 20px;color: red;"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">PART D <br><br>
                             The particulars of the proposed transaction(s) transferring the assets/creating charge for
@@ -347,12 +325,13 @@
                             </table>
                         </form>
                     </div>
+                    <div class="mb-5">
+                        <button type="submit" class="btn btn-primary" style="margin-right: 20px;"
+                            (click)="SubmitForm()">Save Draft</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    <div>
-        <button type="submit" class="btn btn-primary" style="margin-right: 20px;" (click)="SubmitForm()">Save Draft</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
-</main>
+</div>

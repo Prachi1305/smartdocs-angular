@@ -146,7 +146,7 @@ export class FormComponent implements OnInit {
     //     }
     //   });
 
-    this._formService.getFormDetails(9).subscribe((res: any) => {
+    this._formService.getFormDetails(1).subscribe((res: any) => {
       if (res.ResponseCode == 200) {
         this.formDetails = res.Data;
         console.log(this.formDetails);

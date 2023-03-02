@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class CompanyService {
+export class SystemTypeMasterService {
 
   BASE_URL = environment.BASE_URL;
 
@@ -15,57 +15,52 @@ export class CompanyService {
     }),
   };
 
-
   constructor(private _http: HttpClient) { }
 
-  InsertCompanyMaster(type: any) {
+  InsertSystemTypeMaster(form: any) {
     return this._http.post<any>(
-      this.BASE_URL + 'Company/InsertCompanyMaster',
-      type,
-      this.httpOptions
-    );
-  }
-
-  GetComapanyMasterList() {
-    return this._http.get<any>(
-      this.BASE_URL + 'Company/GetCompany',
-      this.httpOptions
-    );
-  }
-
-  GetCompanyMasterDetails(ID: any) {
-    return this._http.get<any>(
-      this.BASE_URL +
-      'Company/GetCompanyMasterDetails?&ID=' +
-      ID,
-      this.httpOptions
-    );
-  }
-
-  updateCompanyMaster(form: any) {
-    return this._http.post<any>(
-      this.BASE_URL + 'Company/UpdateCompany',
+      this.BASE_URL + 'Common/InsertSystemTypeMaster',
       form,
       this.httpOptions
     );
   }
 
-  deleteCompanyMaster(ID: number) {
-    return this._http.delete<any>(
-      this.BASE_URL + 'Company/DeleteCompany?Company_ID=' + ID,
+  GetSystemTypeMasterList() {
+    return this._http.get<any>(
+      this.BASE_URL + 'Common/GetSystemTypeMasterList',
       this.httpOptions
     );
   }
 
-  ValidateCompany(CIN_NO: string, PAN: string) {
+  GetSystemTypeMasterDetails(ID: any) {
     return this._http.get<any>(
       this.BASE_URL +
-      'Company/ValidateCompany?CIN_NO=' +
-      CIN_NO +
-      '&PAN_NO=' +
-      PAN,
+      'Common/GetSystemTypeMasterDetails?&ID=' +
+      ID,
       this.httpOptions
     );
   }
 
+  updateSystemTypeMaster(form: any) {
+    return this._http.post<any>(
+      this.BASE_URL + 'Common/UpdateSystemTypeMaster',
+      form,
+      this.httpOptions
+    );
+  }
+
+  deleteSystemTypeMaster(ID: number) {
+    return this._http.delete<any>(
+      this.BASE_URL + 'Common/DeleteSystemTypeMaster?ID=' + ID,
+      this.httpOptions
+    );
+  }
+
+  GetCategoryFromSystemType(Category: string) {
+    return this._http.get<any>(
+      this.BASE_URL + 'Common/GetCategoryFromSystemType?CATEGORY='
+      + Category,
+      this.httpOptions
+    );
+  }
 }

@@ -2,6 +2,14 @@
 <div class="ex-basic-2">
     <div class="container">
         <div class="row">
+            <div>
+                <div>
+                    <button class="col-md-2 form-btn float-end" (click)="addNewCompany()">
+                        <i class="fa fa-plus me-1"></i> Add Company </button>
+                    <!-- <button class="col-md-2 form-btn float-end d-none" #openModalPopup data-bs-toggle="modal"
+                        href="#companyModal">Add Company </button> -->
+                </div>
+            </div>
             <div class="col-lg-10 mx-auto">
                 <div class="card px-5" style="border:1px solid black">
                     <div class="card-body">
@@ -22,7 +30,10 @@
                                     <td>{{item.NAME}}</td>
                                     <td>{{item.PAN}}</td>
                                     <td>{{item.STATUS}}</td>
-                                    <td><i class="fas fa-edit" style="color: #0aacdd;"></i></td>
+                                    <td>
+                                        <i class="fas fa-edit" style="color: #0aacdd;" (click)="editCompany(item.ID)"></i>
+                                        <i class="fa fa-trash ms-4 pointer text-danger" (click)="deleteCompany(item.ID)"></i>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -1,7 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from 'src/app/services/company.service';
+import { SystemTypeMasterService } from 'src/app/services/system-type-master.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,70 +15,109 @@ export class CompanyComponent implements OnInit {
 
 	companyForm: FormGroup;
 	verticalsList: any[] = [];
+	stateList: any[] = [];
+	statusList: any[] = [];
 	submitted: boolean = false;
+	isUpdate: boolean = false;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _companyService: CompanyService,
+		private _systemTypeMasterService: SystemTypeMasterService,
 		private _router: Router,
+		private _activatedRoute: ActivatedRoute,
 	) { }
 
 	ngOnInit(): void {
 		this.companyForm = this._formBuilder.group({
+			ID: [0],
+			CIN_NO: ['', Validators.required],
 			NAME: ['', Validators.required],
 			FORMER_NAME: [],
 			SHORT_NAME: [],
-			PAN: [],
-			DATE_OF_INCORPORATION: [],
-			STATUS: [],
+			PAN: ['', [Validators.required, Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
+			DATE_OF_INCORPORATION: ['', Validators.required],
+			STATUS: ['', Validators.required],
 			ADDRESS: [],
 			CITY: [],
-			STATE: [],
+			STATE: ['', Validators.required],
 			PIN: [],
-			LANDLINE_NO_1: [],
-			LANDLINE_NO_2: [],
 			MOBILE_NO_1: [],
 			MOBILE_NO_2: [],
 			EMAIL_ID_1: [],
 			EMAIL_ID_2: [],
 			NATURE_OF_BUSINESS: [],
 			INCOME_TAX_WARD: [],
-			NAME_OF_STATUTORY_AUDITOR: [],
-			CEO: [],
-			CFO: [],
 			OTHER_CONTACT_PERSON: [],
-			MAIN_BANKER: [],
-			VERTICALS: ['']
+			VERTICALS: ['', Validators.required]
 		});
 
-		this.GetVerticalsList()
+		this.GetDropdownList();
 
+		var companyId = this._activatedRoute.snapshot.paramMap.get('Id');
+		if (companyId != undefined) {
+			this.isUpdate = true;
+			this.GetCompanyMasterDetails(Number(companyId));
+		}
+
+	}
+
+	get f() {
+		return this.companyForm.controls;
 	}
 
 	InsertCompanyMaster() {
 
-		debugger
 		this.submitted = true;
 
 		if (this.companyForm.invalid) {
 			return;
 		}
 
-		console.log(JSON.stringify(this.companyForm.value));
-		this._companyService.InsertCompanyMaster(this.companyForm.value).subscribe((res: any) => {
-			if (res.responseCode == 200) {
-				this.showSuccessMessage('Comapany Data Saved Successfully');
-				this.Clear();
-				this._router.navigateByUrl('/home/company-master-list');
+		var CIN_NO = this.companyForm.get('CIN_NO')?.value;
+		var PAN = this.companyForm.get('PAN')?.value;
+
+		this._companyService.ValidateCompany(CIN_NO, PAN).subscribe((res: any) => {
+			if (res.Data == null) {
+				this._companyService.InsertCompanyMaster(this.companyForm.value).subscribe((res: any) => {
+					if (res.responseCode == 200) {
+						this.showSuccessMessage('Comapany Data Saved Successfully');
+						this.Clear();
+						this._router.navigateByUrl('/home/company-master-list');
+					}
+				});
 			}
-		});
+			else {
+				var data = res.Data;
+				if (data.CIN_NO != null) {
+					this.showErrorMsg(data.CIN_NO + ' This CIN No already exists!')
+					this.companyForm.get('CIN_NO')?.setValue('');
+				}
+				else if (data.PAN != null) {
+					this.showErrorMsg(data.PAN + ' This PAN already Exists');
+					this.companyForm.get('PAN')?.setValue('');
+				}
+			}
+		})
+
 	}
 
-	GetVerticalsList() {
-		this._companyService.GetComapanyVerticalsList().subscribe((res: any) => {
+	GetDropdownList() {
+		this._systemTypeMasterService.GetCategoryFromSystemType('Verticals').subscribe((res: any) => {
 			if (res.ResponseCode == 200) {
 				this.verticalsList = res.Data;
-				console.log(JSON.stringify(this.verticalsList));
+			}
+		})
+
+		this._systemTypeMasterService.GetCategoryFromSystemType('State').subscribe((res: any) => {
+			if (res.ResponseCode == 200) {
+				this.stateList = res.Data;
+			}
+		})
+
+		this._systemTypeMasterService.GetCategoryFromSystemType('Status').subscribe((res: any) => {
+			if (res.ResponseCode == 200) {
+				this.statusList = res.Data;
 			}
 		})
 	}
@@ -90,13 +131,23 @@ export class CompanyComponent implements OnInit {
 		})
 	}
 
+	showErrorMsg(msg: string) {
+		return Swal.fire({
+			title: 'Error!',
+			text: msg,
+			icon: 'error',
+			confirmButtonColor: '#00bfd8',
+		})
+	}
+
 	Clear() {
 		this.companyForm.reset();
+		this.companyForm.get('STATE')?.setValue('');
+		this.companyForm.get('STATUS')?.setValue('');
 		this.companyForm.get('VERTICALS')?.setValue('');
 	}
 
 	numericOnly(event: any): boolean {
-		// restrict e,+,-,E characters in  input type number
 		const charCode = event.which ? event.which : event.keyCode;
 		if (charCode == 101 || charCode == 69 || charCode == 45 || charCode == 43) {
 			return false;
@@ -110,6 +161,31 @@ export class CompanyComponent implements OnInit {
 		return true;
 	}
 
+	GetCompanyMasterDetails(Id: number) {
+		this._companyService.GetCompanyMasterDetails(Id).subscribe((res: any) => {
+			if (res.ResponseCode == 200) {
+				this.companyForm.patchValue(res.Data);
+				this.companyForm.get('DATE_OF_INCORPORATION')?.setValue(formatDate(res.Data.DATE_OF_INCORPORATION, 'yyyy-MM-dd', 'en'));
+			}
+		});
+	}
+
+	UpdateCompanyMaster() {
+		this.submitted = true;
+		if (this.companyForm.invalid) {
+			return;
+		}
+
+		this._companyService
+			.updateCompanyMaster(JSON.stringify(this.companyForm.value))
+			.subscribe((res: any) => {
+				if (res.responseCode == 200) {
+					this.showSuccessMessage('Company Master updated successfully !');
+					this.Clear();
+					this._router.navigateByUrl('/home/company-master-list');
+				}
+			});
+	}
 
 
 }

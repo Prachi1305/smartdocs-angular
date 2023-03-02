@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyMasterComponent } from './company-master.component';
+import { UserLandingComponent } from './user-landing.component';
 
-describe('CompanyMasterComponent', () => {
-  let component: CompanyMasterComponent;
-  let fixture: ComponentFixture<CompanyMasterComponent>;
+describe('UserLandingComponent', () => {
+  let component: UserLandingComponent;
+  let fixture: ComponentFixture<UserLandingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CompanyMasterComponent ]
+      declarations: [ UserLandingComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CompanyMasterComponent);
+    fixture = TestBed.createComponent(UserLandingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
