@@ -76,7 +76,9 @@ export class AccountAuditIssueComponent {
           this.issueForm.patchValue(res.Data);
         
           this.issueForm.get('RAISED_DATE')?.setValue(formatDate(res.Data.RAISED_DATE, 'yyyy-MM-dd', 'en'));
+        
           this.issueForm.get('DUE_DATE')?.setValue(formatDate(res.Data.DUE_DATE, 'yyyy-MM-dd', 'en'));
+
           this.issueForm.get('CLOSURE_DATE')?.setValue(formatDate(res.Data.CLOSURE_DATE,'yyyy-MM-dd','en'));
         }
       });

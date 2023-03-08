@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                         <input type="date" class="form-control-input notEmpty" formControlName="RAISED_DATE" [ngClass]="{'invalid':submitted && f.RAISED_DATE.errors}" >
                         <label class="label-control">Raised Date
-                            <span class="text-danger">*</span>
+                      
                           
                         </label>
                     </div>
@@ -84,7 +84,7 @@
                             <option class="select-option"*ngFor="let item of statusList"value="{{item.NAME}}" >{{item.NAME}}</option>
                         </select>
                         <label class="label-control">Status
-                            <span class="text-danger">*</span>
+                          
                            
                         </label>
                     </div>
@@ -96,20 +96,19 @@
                         </select>
                         
                         <label class="label-control">Severity
-                            <span class="text-danger">*</span>
-                         
+                            
                         </label>
                     </div>
                     <div class="col-md-12" *ngIf="isUpdate">
                         <textarea class="form-control-input notEmpty"    formControlName="RESOLUTION"></textarea>
                         <label class="label-control"   >Resolution 
-                            <span class="text-danger">*</span>
+                            
                         </label>
                     </div>
                     <div class="col-md-12"  *ngIf="isUpdate" >
                         <input type="date"class="form-control-input notEmpty"  formControlName="CLOSURE_DATE">
                         <label class="label-control"  >Closure Date
-                            <span class="text-danger">*</span>
+                          
                         </label>
                     </div>
                     <div class="form-group">
