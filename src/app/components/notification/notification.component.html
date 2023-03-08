@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="ex-basic-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card px-5" style="border:1px solid black">
+                    <div class="card-body">
+                        <table class="table align-middle mb-2 cell-border compact" id="data-table-setup">
+                            <tr *ngFor="let item of notificationList">
+                                <p>
+                                    PAN : <b>{{item.pan}}</b>
+                                    Proceeding Name : <b>{{item.proceedingName}}</b>
+                                    Name of Assesse : <b>{{item.nameOfAssesse}}</b>
+                                    ITR Type : <b>{{item.itrType}}</b>
+                                    Assessment Year : <b>{{item.assessmentYear}}</b>
+                                    Financial Year : <b>{{item.financialYr}}</b>
+                                    Notice Name : <b>{{item.noticeName}}</b>
+                                </p>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

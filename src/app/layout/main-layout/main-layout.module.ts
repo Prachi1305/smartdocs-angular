@@ -14,6 +14,8 @@ import { SystemTypeMasterComponent } from 'src/app/components/system-type-master
 import { AssessmentYearComponent } from 'src/app/components/assessment-year/assessment-year.component';
 import { UserLandingComponent } from 'src/app/components/user-landing/user-landing.component';
 import { AccountAuditIssueComponent } from 'src/app/components/account-audit-issue/account-audit-issue.component';
+import { BalanceSheetComponent } from 'src/app/components/balance-sheet/balance-sheet.component';
+import { NotificationComponent } from 'src/app/components/notification/notification.component';
 
 
 
@@ -28,7 +30,9 @@ import { AccountAuditIssueComponent } from 'src/app/components/account-audit-iss
     SystemTypeMasterComponent,
     AssessmentYearComponent,
     UserLandingComponent,
-    AccountAuditIssueComponent
+    AccountAuditIssueComponent,
+    BalanceSheetComponent,
+    NotificationComponent 
   ],
   imports: [
     CommonModule,
