@@ -262,6 +262,8 @@ screen and (-ms-high-contrast: none) {
 .form-control-input.notEmpty+.label-control,
 .form-control-select:focus+.label-control,
 .form-control-select.notEmpty+.label-control,
+.form-control-file:focus+.label-control,
+.form-control-file.notEmpty+.label-control,
 .form-control-textarea:focus+.label-control,
 .form-control-textarea.notEmpty+.label-control {
 	top: 0.125rem;
@@ -300,6 +302,22 @@ screen and (-ms-high-contrast: none) {
 	transition: all 0.2s;
 }
 
+.form-control-file {
+	display: block;
+	/* needed for proper display of the label in Firefox, IE, Edge */
+	width: 100%;
+	padding-top: 2.0625rem;
+	padding-bottom: 1.0625rem;
+	padding-left: 2.3125rem;
+	padding-right: 1.3125rem;
+	border: 1px solid #b8d5db;
+	border-radius: 0.25rem;
+	background-color: #fff;
+	color: black;
+	font: 400 0.875rem/1.875rem sans-serif;
+	transition: all 0.2s;
+}
+
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 @media screen and (-ms-high-contrast: active),
 screen and (-ms-high-contrast: none) {
@@ -310,6 +328,12 @@ screen and (-ms-high-contrast: none) {
 	}
 
 	.form-control-select {
+		padding-top: 1.25rem;
+		padding-bottom: 0.75rem;
+		line-height: 1.75rem;
+	}
+
+	.form-control-file {
 		padding-top: 1.25rem;
 		padding-bottom: 0.75rem;
 		line-height: 1.75rem;
@@ -352,6 +376,7 @@ select::-ms-expand {
 
 .form-control-input:focus,
 .form-control-select:focus,
+.form-control-file:focus,
 .form-control-textarea:focus {
 	border: 1px solid #a1a1a1;
 	outline: none;
@@ -360,6 +385,7 @@ select::-ms-expand {
 
 .form-control-input:hover,
 .form-control-select:hover,
+.form-control-file:hover,
 .form-control-textarea:hover {
 	border: 1px solid #a1a1a1;
 }

@@ -53,7 +53,6 @@ export class UserLandingComponent {
   }
 
   AddUpdateAssYear() {
-    debugger
     this.submitted = true;
 
     if (this.landingForm.invalid) {
@@ -76,5 +75,21 @@ export class UserLandingComponent {
     return this.landingForm.controls;
   }
 
+  onSubmit() {
+    this.landingForm.get('ASSESSMENT_YEAR')?.setValidators([Validators.required]);
+    this.landingForm.get('ASSESSMENT_YEAR')?.updateValueAndValidity();
+
+    this.submitted = true;
+
+    if (this.landingForm.invalid) {
+      return;
+    }
+
+    console.log(this.landingForm.value)
+
+    localStorage.setItem('COMPANY_ID', this.landingForm.get('COMPANY_ID')?.value)
+    localStorage.setItem('ASSESSMENT_YEAR', this.landingForm.get('ASSESSMENT_YEAR')?.value)
+
+  }
 
 }

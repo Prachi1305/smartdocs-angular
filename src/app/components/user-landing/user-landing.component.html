@@ -23,7 +23,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select class="form-control-select notEmpty" formControlName="ASSESSMENT_YEAR">
+                                    <select class="form-control-select notEmpty" [ngClass]="{'invalid':submitted && f.ASSESSMENT_YEAR.errors}" formControlName="ASSESSMENT_YEAR">
                                         <option class="select-option" value="" selected disabled>Select Assessment Year
                                         </option>
                                         <option class="select-option" *ngFor="let item of assessmentYearList" value="{{item.ASSESSMENT_YEAR}}">
@@ -40,7 +40,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group">
-                                    <button class="form-control-submit-button col-md-4 mt-3">Submit</button>
+                                    <button class="form-control-submit-button col-md-4 mt-3" (click)="onSubmit()">Submit</button>
                                     <button class="form-control-submit-button col-md-4 mx-3 mt-3">Clear</button>
                                 </div>
                             </div>
