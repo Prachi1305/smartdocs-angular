@@ -113,7 +113,7 @@ export class SystemTypeMasterComponent {
     }
 
     this._systemTypeMasterService
-      .updateSystemTypeMaster(JSON.stringify(this.masterForm.value))
+      .updateSystemTypeMaster(this.masterForm.value)
       .subscribe((res: any) => {
         if (res.responseCode == 200) {
           this.showSuccessMessage('System Type Master updated successfully !');
