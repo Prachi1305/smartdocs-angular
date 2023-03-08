@@ -14,7 +14,7 @@ export class SystemTypeMasterComponent {
   systemTypeMasterList: any[] = [];
   masterForm: FormGroup;
   categoryList: any[] = ['Verticals', 'State', 'Status','Name of Auditor','CEO','CFO','Main Banker',
-                          'Director','Assessment Year'];
+                          'Director','Assessment Year','Severity','Assets','Liabilities'];
   submitted: boolean = false;
   isUpdate: boolean = false;
 
